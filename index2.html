@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Innervuse &middot; Online</title>
+    
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+
+        var Song = Backbone.Model.extend({
+
+          defaults: {
+            name: 'Name Not Specified',
+            artist: 'Artist Not Specified'
+          },
+
+          initialize: function(){
+            console.log('Just like music!');
+          }
+
+        });
+
+        var Album = Backbone.Collection.extend({
+            model: Song
+        });
+
+        console.log('Instantiate Songs...\n');
+        var song1 = new Song({ name: "song1", artist: "artist1" });
+        var song2 = new Song({ name: "song2", artist: "artist2" });
+        var song3 = new Song({ name: "song3", artist: "artist3" });
+
+        var song4 = new Song;
+        song4 = song4.set({ name: "Marilyn", artist: "Howard" });
+
+        var song1name = song1.get("name") + ' ' + song1.get("artist");
+        console.log('song1 name and artist = '  + song1name + '\n');
+        var song2name = song2.get("name") + ' ' + song2.get("artist");
+        console.log('song2 name and artist = '  + song2name + '\n');
+        var song3name = song3.get("name") + ' ' + song3.get("artist");
+        console.log('song3 name and artist = '  + song3name + '\n');
+        var song4name = song4.get("name") + ' ' + song4.get("artist");
+        console.log('song4 name and artist = '  + song4name + '\n');
+
+        console.log('Instantiate Album...\n');
+        var album1 = new Album([ song1, song2, song3 ]);
+
+        console.log('List Models:\n');
+        console.log( album1.models );
+
+        var AppRouter = Backbone.Router.extend({
+          routes: {
+            "*actions": "defaultRoute"
+          },
+
+          defaultRoute: function( actions ){
+            alert( actions );
+          }
+        });
+
+        var app_router = new AppRouter;
+        Backbone.history.start();
+
+      });      
+    </script>
+  </head>
+
+  <body>
+  
+
+  </body>
+
+</html>
